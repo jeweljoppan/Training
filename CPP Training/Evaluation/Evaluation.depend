@@ -1,0 +1,65 @@
+# depslib dependency file v1.0
+1564137690 source:d:\users\jewel\work\t0571\cpptraining\evaluation\main.cpp
+	"include/CAdmin.h"
+
+1564140080 d:\users\jewel\work\t0571\cpptraining\evaluation\include\cadmin.h
+	<chrono>
+	<thread>
+	"CFile.h"
+	"CInputValidate.h"
+	"CManager.h"
+	"CProjectLeader.h"
+	"CTrainee.h"
+
+1564377627 d:\users\jewel\work\t0571\cpptraining\evaluation\include\cinputvalidate.h
+	<iostream>
+	<string>
+	<limits>
+	<float.h>
+	<stdlib.h>
+	<conio.h>
+	<cstring>
+	<functional>
+	<regex>
+
+1564135342 d:\users\jewel\work\t0571\cpptraining\evaluation\include\cmanager.h
+	"CEmployee.h"
+
+1564377786 d:\users\jewel\work\t0571\cpptraining\evaluation\include\cemployee.h
+	<iostream>
+	<string.h>
+	<conio.h>
+	<iomanip>
+	<stdio.h>
+
+1564135348 d:\users\jewel\work\t0571\cpptraining\evaluation\include\cprojectleader.h
+	"CEmployee.h"
+
+1564135383 d:\users\jewel\work\t0571\cpptraining\evaluation\include\ctrainee.h
+	"CEmployee.h"
+
+1564141855 source:d:\users\jewel\work\t0571\cpptraining\evaluation\src\cemployee.cpp
+	"../include/CEmployee.h"
+
+1564377605 source:d:\users\jewel\work\t0571\cpptraining\evaluation\src\cinputvalidate.cpp
+	"../include/CInputValidate.h"
+
+1564136253 d:\users\jewel\work\t0571\cpptraining\evaluation\include\cfile.h
+	<fstream>
+	"CEmployee.h"
+
+1564377867 source:d:\users\jewel\work\t0571\cpptraining\evaluation\src\cfile.cpp
+	"../include/CFile.h"
+
+1564136930 source:d:\users\jewel\work\t0571\cpptraining\evaluation\src\cmanager.cpp
+	"../include/CManager.h"
+
+1564137939 source:d:\users\jewel\work\t0571\cpptraining\evaluation\src\cprojectleader.cpp
+	"../include/CProjectLeader.h"
+
+1564137024 source:d:\users\jewel\work\t0571\cpptraining\evaluation\src\ctrainee.cpp
+	"../include/CTrainee.h"
+
+1564143456 source:d:\users\jewel\work\t0571\cpptraining\evaluation\src\cadmin.cpp
+	"../include/CAdmin.h"
+
