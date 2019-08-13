@@ -117,7 +117,7 @@ h1 {
 }
 
 .welcome-page {
-	background-image: url("assets/img/hero-image.jpg");
+	background-image: url("img/hero-image.jpg");
 	background-size: 35%;
 	height: 650px;
 	background-repeat: no-repeat;
@@ -219,25 +219,25 @@ input[type="text"] {
 #ledger {
 	width: 70px;
 	height: 84px;
-	background: url("assets/img/iconset-sprite.jpg") 0 0;
+	background: url("img/iconset-sprite.jpg") 0 0;
 }
 
 #network {
 	width: 70px;
 	height: 84px;
-	background: url("assets/img/iconset-sprite.jpg") -90px 0;
+	background: url("img/iconset-sprite.jpg") -90px 0;
 }
 
 #career {
 	width: 70px;
 	height: 84px;
-	background: url("assets/img/iconset-sprite.jpg") -190px 0;
+	background: url("img/iconset-sprite.jpg") -190px 0;
 }
 
 #consultant {
 	width: 70px;
 	height: 84px;
-	background: url("assets/img/iconset-sprite.jpg") -300px 0;
+	background: url("img/iconset-sprite.jpg") -300px 0;
 }
 
 .features h6 {
@@ -279,7 +279,7 @@ hr {
 }
 .search-job {
 	padding: 100px 20% 100px 20%;
-	background-image: url("assets/img/bannerbg.jpg");
+	background-image: url("img/bannerbg.jpg");
 	background-position: 0px 0px;
 	background-repeat: no-repeat;
 	height: 550px;
@@ -298,7 +298,7 @@ hr {
 
 .job-data {
 	border-radius: 5px;
-	background-image: url("assets/img/lens.jpg");
+	background-image: url(img/lens.jpg);
 	background-color: #ffffff;
 	background-size: 150px;
 	background-position: 10px 25px;
@@ -333,14 +333,14 @@ hr {
 	height: 30px;
 	opacity: 1;
 	display: inline-block;
-	background: url("assets/img/iconset-sprite-contact.jpg") 0 5px;
+	background: url("img/iconset-sprite-contact.jpg") 0 5px;
 }
 #number {
 	width: 25px;
 	height: 30px;
 	opacity: 1;
 	display: inline-block;
-	background: url("assets/img/iconset-sprite-contact.jpg") 0 40px;
+	background: url("img/iconset-sprite-contact.jpg") 0 40px;
 }
 
 #mail {
@@ -348,7 +348,7 @@ hr {
 	height: 30px;
 	opacity: 1;
 	display: inline-block;
-	background: url("assets/img/iconset-sprite-contact.jpg") 0 70px;
+	background: url("img/iconset-sprite-contact.jpg") 0 70px;
 }
 .footer {
 	color: #ffffff;
