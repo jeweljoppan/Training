@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="author" content="Jewel Jo Prince" />
+  <meta name="description" content="Sample JavaScript program" />
+  <meta name="keywords" content="HTML, JavaScript ">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sample JS</title>
+</head>
+
+<body>
+  <h1>Sample program using JS</h1>
+  <p>Call by different methods</p>
+  <p id="sample"></p>
+  <p id="sample1"></p>
+
+  <script>
+    document.getElementById("sample1").innerHTML = "call by id";
+    var x = document.getElementsByTagName("p");
+    document.getElementById("sample").innerHTML = 'call by tag name: ' + x[0].innerHTML;
+  </script>
+</body>
+
+</html>
