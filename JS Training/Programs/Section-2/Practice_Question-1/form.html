@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="author" content="Jewel Jo Prince" />
+    <meta name="description" content="Form with validation" />
+    <meta name="keywords" content="HTML,CSS,JS ">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" type="text/css" href="assets/CSS/Practice_Question-1.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="assets/JS/Practice_question-1.js"></script>
+    <title>Practice Question 1</title>
+</head>
+
+<body class="col-md-10 col-lg-6 m-auto pt-5">
+    <form name="registration" onsubmit="">
+        <section class="row p-2 ">
+            <label class="col-4 p-1 form-required"><strong>Email</strong></label>
+            <input class="col-8 p-1" type="email" id="mail" required />
+            <label class=" offset-4 text-muted" for="mail">example@example.com</label>
+        </section>
+        <section class="row p-2">
+            <label class="col-4 p-1 form-required"><strong>Name</strong></label>
+            <input class="col-3 p-1" type="text" id="first" required />
+            <input class="col-3 offset-1 p-1" type="text" id="last" required />
+            <label class="offset-4 p-0 text-muted col-3" for="first">First Name</label>
+            <label class=" offset-1 p-0 text-muted col-3" for="last">Last Name</label>
+        </section>
+        <section class="row p-2">
+            <label class="col-4 p-0"><strong>Gender</strong></label>
+            <input class="mt-2 mr-2" name="gender" type="radio" id="gender1" value="Male">Male</input>
+            <input class="ml-5 mt-2 mr-2" name="gender" type="radio" id="gender2" value="Female">Female</input>
+        </section>
+        <section class="row p-2">
+            <label class="col-4 p-0 form-required"><strong>Phone Number</strong></label>
+            <input class=" col-2 p-1" type="number" id="area" required />
+            <label>&nbsp;-&nbsp;</label>
+            <input class="col-4 p-1" type="number" id="phone" required />
+            <label class=" offset-4 text-muted col-2 p-0" for="area">Area Code</label>
+            <label class=" text-muted col-4 pl-3" for="phone">Phone Number</label>
+        </section>
+        <section class="row p-2">
+            <label class="col-4 p-0"><strong>Address</strong></label>
+            <input class="col-8 p-1" type="text" id="street" />
+            <label class=" offset-4 text-muted" for="street">Street Address</label>
+            <input class="mt-2 p-1 offset-4 col-4" type="text" id="city" />
+            <input class="mt-2 p-1 offset-1 col-3" type="text" id="state" />
+            <label class=" offset-4 col-4 text-muted p-0" for="city">City</label>
+            <label class=" col-3 text-muted offset-1 p-0" for="state">State/Province</label>
+            <input class="offset-4 mt-2 p-1" type="number" id="pin" />
+            <label class=" offset-4 col-3 p-0 text-muted" for="pin">Postal/Zipcode</label>
+        </section>
+        <section class="row p-2">
+            <input class="mt-2" type="checkbox" id="checkbox" name="accept condition" value="accept" required><label
+                class="col-lg-11 col-md-10 col-sm-5"><strong>I accept the
+                    Terms and Conditions.</strong></label><br />
+            <button class="offset-md-10  offset-lg-10 offset-sm-10  col-2 px-3 py-2" onclick="validation()" id="submit">Submit</button>
+        </section>
+    </form>
+</body>
+
+</html>

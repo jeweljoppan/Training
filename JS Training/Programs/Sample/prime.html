@@ -8,6 +8,26 @@
   <meta name="keywords" content="HTML ">
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Print prime numbers</title>
+  <script>
+    function primeGenerator() {
+      var i, j, flag;
+      var prime = " ";
+      var limit = document.getElementById("range").value;
+      for (i=2; i <= limit; i++) {
+        flag = 0;
+        for (j = 2; j < i; j++) {
+          if (i % j == 0) {
+            flag = 1;
+          }
+        }
+        if (flag == 0) {
+          prime += i ;
+          prime += "<br />";
+        }
+      }
+      document.getElementById("generate").innerHTML = prime;
+    }
+  </script>
 </head>
 
 <body>
@@ -16,13 +36,6 @@
   <input type="number" id="range" value=0 /><br />
   <button onClick="primeGenerator()">Find</button>
   <p id="generate"></p>
-
-
-  <script>
-    var i;
-    var limit = docum
-    for
-  </script>
 </body>
 
 </html>
