@@ -1,0 +1,80 @@
+Syle Guide : EVALUATION QUESTION 2
+========================================
+----------------------------------------
+COLOR PALETTE 
+----------------------------------------
+Primary Color:  #92c800
+
+Secondary Color: #222222
+Grey Shade Dark: #888888
+Grey Shade Medium: #b7b7b7
+Grey Shade Light: #cacaca
+Grey Shade Border Light: #f5f5f5
+----------------------------------------
+TYPOGRAPHY
+----------------------------------------
+Primary Font: Poppins
+Alternative fonts: Arial, sans-serif
+
+Embed URL: 
+https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900&display=swap
+
+
+FONT SIZES
+-----------------------------------------
+Base font size: 14px
+
+Navigation Links  - Inherit Base font 
+
+Banner Title : 48px
+Banner Subtitle - 16px
+
+Section Title - 32px
+Section Subtitle - Inherit Base font 
+
+Category Title -    24px 
+Category Subtitle  - Inherit Base font 
+
+Feature Title -   18px
+Feature Description  -13px
+
+Footer Title - 16px
+Footer Links - 13px
+Footer Text - 13px
+
+Copyright text - 12px
+
+Inner page Title - 60px
+Inner page Subtitle(Breadcrumb) - 12px
+
+Listing Item Title - 21px
+Listing Item Subtitle - 12px
+Listing Item Category Text - 12px
+Listing Item Description - Inherit Base font 
+Listing Item Date - 12px
+Listing Item User - 12px
+Badge Text- 12px
+
+Listing Item Type(For Sale/ For Rent)  - 12px
+Listing Item Price - 16px
+Listing Item Price prefix/ suffix text  - 10px
+
+Button - Inherit Base font 
+Text Input - Inherit Base font 
+Slider Text - Inherit Base font 
+
+Pagination text - Inherit Base font 
+
+----------------------------------------
+
+
+
+
+
+
+
+
+ 
+
+
+
