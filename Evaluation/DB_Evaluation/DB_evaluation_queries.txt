@@ -1,0 +1,109 @@
+QUERIES:
+
+Query 1:
+
+SELECT 	s.site_code AS "Site Code", s.name As "Site Name", 
+	CONCAT_WS( ",", s.address_line_1, s.address_line_2, st.state_name, c.country_name, zipcode) AS "Address"
+	FROM site AS s
+	INNER JOIN state AS st
+	ON st.state_id = s.state
+	INNER JOIN country AS c
+	ON c.country_id = s.country
+	WHERE region IS NULL
+	ORDER BY s.name ASC;
+
+Query 2:
+
+SELECT 	r.name AS "Region Name", s.name AS "Site Name", 
+	c.name AS "Controller Name", 
+	CASE WHEN c.current_status = 0
+	THEN 'Inactive'
+	ELSE 'Active'
+	END AS "Online Status",
+	c.url AS "URL"
+	FROM region AS r
+	INNER JOIN site AS s
+	ON r.region_id = s.region
+	INNER JOIN controller AS c
+	ON c.current_site = s.site_id
+	INNER JOIN state
+	ON state.state_id = s.state
+	WHERE state.state_name ="Kerala"
+	ORDER BY r.name ASC,s.name ASC, c.name ASC;
+
+Query 3:
+
+SELECT	r.name AS "Region Name", s.name AS "Site Name", 
+	c.name AS "Controller Name", c.url AS "URL",
+	count(p.point_id) AS PointCount
+	FROM region AS r
+	INNER JOIN site AS s
+	ON r.region_id = s.region
+	INNER JOIN controller AS c
+	ON c.current_site = s.site_id
+	INNER JOIN point As p
+	ON p.controller = c.controller_id
+	WHERE c.current_status = 1
+	GROUP BY c.controller_id
+	ORDER BY count(p.point_id) DESC;
+
+Query 4:
+
+SELECT 	s.name AS 'Site',ur.role AS 'User Role', count(ur.role) AS 'User count'
+	FROM site AS s
+	INNER JOIN duty_assigned AS ds
+	ON s.site_id = ds.site
+	INNER JOIN user_details AS ud
+	ON ds.user_details = ud.details_id
+	INNER JOIN user_role AS UR
+	ON ur.role_id = ud.role
+	where ud.current_status = 1 
+	GROUP BY s.name
+	HAVING COUNT(ur.role) >3;
+
+
+Trigger:
+
+DELIMITER //
+
+CREATE TRIGGER update_point_UPDATE
+	AFTER UPDATE ON controller
+	FOR EACH ROW
+	BEGIN
+		DECLARE status BOOLEAN;
+		
+		SELECT current_status 
+		INTO @status
+		FROM  controller
+		WHERE controller_id = NEW.controller_id;
+
+		UPDATE point
+		SET current_status = @status
+		WHERE controller = NEW.controller_id;
+	END;
+//
+
+DELIMITER ;	
+
+DELIMITER //
+
+CREATE TRIGGER update_point_UPDATE
+	AFTER INSERT ON controller
+	FOR EACH ROW
+	BEGIN
+		DECLARE status BOOLEAN;
+		
+		SELECT current_status 
+		INTO @status
+		FROM  controller
+		WHERE controller_id = NEW.controller_id;
+
+		UPDATE point
+		SET current_status = @status
+		WHERE controller = NEW.controller_id;
+	END;
+//
+
+DELIMITER ;	
+	
+	

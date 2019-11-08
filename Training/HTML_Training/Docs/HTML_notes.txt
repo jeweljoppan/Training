@@ -1,0 +1,48 @@
+Charset:
+To display an HTML page correctly, a web browser must know the character set used in the page.
+This is specified in the <meta> tag:
+<meta charset="UTF-8">
+Viewport:
+The viewport is the user's visible area of a web page. The viewport varies with the device, and will be smaller on a mobile phone than on a computer screen.
+<strong</strong> - bold
+<em></em>- italic
+<br /> - newline
+<hr/> - horizontal line
+<!--comment>
+
+HTML Layout
+<header> - Defines a header for a document or a section
+<nav> - Defines a container for navigation links
+<section> - Defines a section in a document
+<article> - Defines an independent self-contained article
+<aside> - Defines content aside from the content (like a sidebar)
+<footer> - Defines a footer for a document or a section
+<details> - Defines additional details
+<summary> - Defines a heading for the <details> element
+HTML Layout Techniques
+HTML tables (not recommended)
+CSS float property
+CSS flexbox
+CSS framework
+CSS grid
+
+Float property
+The CSS float property specifies how an element should float.
+The CSS clear property specifies what elements can float beside the cleared element and on which side.
+Float:
+left - The element floats to the left of its container
+right- The element floats to the right of its container
+none - The element does not float (will be displayed just where it occurs in the text). This is default
+inherit - The element inherits the float value of its parent
+Clear:
+none - Allows floating elements on both sides. This is default
+left - No floating elements allowed on the left side
+right- No floating elements allowed on the right side
+both - No floating elements allowed on either the left or the right side
+inherit - The element inherits the clear value of its parent
+If an element is taller than the element containing it, and it is floated, it will "overflow" outside of its container:Then we can add overflow: auto; to the containing element to fix this problem:
+
+
+
+
+

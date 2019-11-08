@@ -1,0 +1,21 @@
+#amount{
+    border: 0;
+    width: 120px;
+    text-align: center;
+}
+
+.ui-slider-handle.handle-icon{
+ border-radius: 50%;
+ height: 13px;;
+ width: 13px;
+background-color: #92c800;
+}
+
+.ui-slider-range.range-color{
+    background-color: #92c800;
+    height:5px;
+}
+
+.ui-slider.slider-height{
+  height: 5px;
+}

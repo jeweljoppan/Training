@@ -1,0 +1,579 @@
+Creator: Guido van Rossum
+
+
+Commetns start wiht #
+// : floor operation
+** : exponent
+Sting ‘ or “, use \ to escape “ or ‘
+
+a = 1 + 2 + 3 + \
+   4 + 5 + 6 + \
+   7 + 8 + 9
+For multiline statements
+
+a = 1; b = 2; c = 3
+For multiple statements in a line.
+
+If you don’t want characters prefaced by \ to be interpreted as special characters, you can use raw strings by adding an r before the first quote
+ End of lines are automatically included in the string, but it’s possible to prevent this by adding a \ at the end of the line:
+Two or more string literals (i.e. the ones enclosed between quotes) next to each other are automatically concatenated. This only works with two literals though, not with variables or expressions:
+
+Word[-1] last letter from end.
+word[2:5]  # characters from position 2 (included) to 5 (excluded)
+
+Len gets the length of the string.
+list=[1,2,3,4];
+list[0] : 1
+List[-1]:
+
+For constats create a file constant.py
+PI = 3.14
+GRAVITY = 9.8
+
+And import it
+
+import constant
+
+
+print(constant.PI)
+print(constant.GRAVITY)
+Use None keyword to store null value.
+
+There are four different literal collections List literals, Tuple literals, Dict literals, and Set literals.
+
+List anything
+Tuple immutable,faster
+Set unordered, no indexing, no duplicates.
+Dictionary unordered collection of key value pairs.
+
+For conversion we can use int(), float(), str()
+
+print(*objects, sep=' ', end='\n', file=sys.stdout, flush=False)
+Here, objects is the value(s) to be printed.
+The sep separator is used between the values. It defaults into a space character.
+After all values are printed, end is printed. It defaults into a new line.
+The file is the object where the values are printed and its default value is sys.stdout (screen). Here are an example to illustrate this.
+
+
+print('I love {0} and {1}'.format('bread','butter'))
+# Output: I love bread and butter
+
+input([prompt]
+Logical operators:
+and or not
+
+Identity operator: is and is not
+They are used to check if two values (or variables) are located on the same part of the memory
+x1 = 5
+y1 = 5
+x2 = 'Hello'
+y2 = 'Hello'
+x3 = [1,2,3]
+y3 = [1,2,3]
+
+
+# Output: False
+print(x1 is not y1)
+
+
+# Output: True
+print(x2 is y2)
+
+
+# Output: False
+print(x3 is y3)
+we see that x1 and y1 are integers of same values, so they are equal as well as identical. Same is the case with x2 and y2 (strings).
+But x3 and y3 are list. They are equal but not identical. It is because interpreter locates them separately in memory although they are equal.
+
+Membership operator:
+In and not in
+x = 'Hello world'
+y = {1:'a',2:'b'}
+
+
+# Output: True
+print('H' in x)
+
+
+# Output: True
+print('hello' not in x)
+
+
+# Output: True
+print(1 in y)
+
+
+# Output: False
+print('a' in y)
+ 1 is key and 'a' is the value in dictionary y. Hence, 'a' in y returns False.
+
+# Note: You may get different value of id
+
+a = 2
+
+# Output: id(a) = 10919424
+print('id(a) =', id(a))
+
+a = a+1
+
+# Output: id(a) = 10919456
+print('id(a) =', id(a))
+
+# Output: id(3) = 10919456
+print('id(3) =', id(3))
+
+b = 2
+
+# Output: id(2)= 10919424
+print('id(2) =', id(2))
+This is efficient as Python doesn't have to create a new duplicate object. This dynamic nature of name binding makes Python powerful; a name could refer to any type of object.
+
+Functions can be assigned to variables: 
+def  print()
+	…
+a = print()
+
+A namespace containing all the built-in names is created when we start the Python interpreter and exists as long we don't exit.
+At any given moment, there are at least three nested scopes.
+Scope of the current function which has local names
+Scope of the module which has global names
+Outermost scope which has built-in names
+Use “global” keyword to invoke global variable with the same name.
+
+
+if expression:
+	Body
+elif:
+body
+else:
+	Body
+
+for val in seq:
+	Body
+else:(optional)
+body	
+A for loop can have an optional else block as well. The else part is executed if the items in the sequence used in for loop exhausts.
+break statement can be used to stop a for loop. In such case, the else part is ignored.
+
+Range function: range(start,stop,step size)
+
+while expression:
+	Body
+else:(optional)
+	Body
+Similar to for, else.
+
+ pass is a null statement. The difference between a comment and pass statement in Python is that, while the interpreter ignores a comment entirely, pass is not ignored.
+However, nothing happens when pass is executed. It results into no operation (NOP).
+def function_name(parameters):
+	"""docstring"""
+	statement(s)
+The first string after the function header is called the docstring and is short for documentation string. It is used to explain in brief, what a function does.
+Although optional, documentation is a good programming practice. Unless you can remember what you had for dinner last week, always document your code.
+ “”” string is available to us as __doc__ attribute of the function.
+print(functionName.__doc__) prints the docstring.
+
+double = lambda x: x * 2
+We use lambda functions when we require a nameless function for a short period of time.
+
+Use nonlocal keyword to create variable within functions
+def outer():
+    x = "local"
+
+    def inner():
+        nonlocal x
+        x = "nonlocal"
+        print("inner:", x)
+    
+    inner()
+    print("outer:", x)
+
+outer()
+inner: nonlocal
+outer: nonlocal 
+Global variables are not modifiable in functions unless specified using global keyword inside the function.
+
+Function we can use *args and **kwargs to pass  multiple arguments to the function.
+
+Modules can be imported
+-> import math as m
+We can import specific names from a module without importing the module as a whole.
+-> from math import pi, e
+If imported as explained above we can use it as follows.
+-> print("The value of pi is", pi)
+
+from math import *
+Imports all names except those starting with underscore. Not a good practice as this can lead to duplicate definitions for an identifier.
+While importing a module, Python looks at several places. Interpreter first looks for a built-in module then (if not found) into a list of directories defined in sys.path. The search is in this order.
+The current directory.
+PYTHONPATH (an environment variable with a list of directory).
+The installation-dependent default directory.
+>>> import sys
+>>> sys.path
+['',
+'C:\\Python33\\Lib\\idlelib',
+'C:\\Windows\\system32\\python33.zip',
+'C:\\Python33\\DLLs',
+'C:\\Python33\\lib',
+'C:\\Python33',
+'C:\\Python33\\lib\\site-packages']
+
+The Python interpreter imports a module only once during a session. 
+
+We can use the reload() function inside the imp module to reload a module. This is how its done.
+
+>>> import imp
+>>> import my_module
+This code got executed
+>>> import my_module
+>>> imp.reload(my_module)
+This code got executed
+<module 'my_module' from '.\\my_module.py'>
+ dir() function to find out names that are defined inside a module. Inside a module there are default python  attributes associated with the module. ( eg __name__)
+
+Packages:
+ A Python package can have sub-packages and modules.A directory must contain a file named __init__.py in order for Python to consider it as a package. This file can be left empty but we generally place the initialization code for that package in this file.
+https://www.programiz.com/python-programming/package
+
+File:
+
+open() to open a file.
+f = open("img.bmp",'r+b')
+ In mode, we specify whether we want to read 'r', write 'w' or append 'a' to the file. We also specify if we want to open the file in text mode or binary mode.The default is reading in text mode. In this mode, we get strings when reading from the file.
+
+
+Mode
+Description
+'r'
+Open a file for reading. (default)
+'w'
+Open a file for writing. Creates a new file if it does not exist or truncates the file if it exists.
+'x'
+Open a file for exclusive creation. If the file already exists, the operation fails.
+'a'
+Open for appending at the end of the file without truncating it. Creates a new file if it does not exist.
+'t'
+Open in text mode. (default)
+'b'
+Open in binary mode.
+'+'
+Open a file for updating (reading and writing)
+
+f.close() to close the file.
+A safer way is to use a try...finally block.
+try:
+  f = open("test.txt",encoding = 'utf-8')
+  # perform file operations
+finally:
+  f.close()
+The best way to do this is using the with statement. This ensures that the file is closed when the block inside with is exited.
+We don't need to explicitly call the close() method. It is done internally.
+with open("test.txt",encoding = 'utf-8') as f:
+  # perform file operations
+To write to a file use the following
+with open("test.txt",'w',encoding = 'utf-8') as f:
+  f.write("my first file\n")
+  f.write("This file\n\n")
+
+To read:
+>>> f = open("test.txt",'r',encoding = 'utf-8')
+>>> f.read(4)    # read the first 4 data
+'This'
+
+
+>>> f.read(4)    # read the next 4 data
+' is '
+
+
+>>> f.read()     # read in the rest till end of file
+'my first file\nThis file\ncontains three lines\n'
+
+
+>>> f.read()
+Effcient method is:
+>>> for line in f:
+...     print(line, end = '')
+...
+
+Method
+Description
+close()
+Close an open file. It has no effect if the file is already closed.
+detach()
+Separate the underlying binary buffer from the TextIOBase and return it.
+fileno()
+Return an integer number (file descriptor) of the file.
+flush()
+Flush the write buffer of the file stream.
+isatty()
+Return True if the file stream is interactive.
+read(n)
+Read atmost n characters form the file. Reads till end of file if it is negative or None.
+readable()
+Returns True if the file stream can be read from.
+readline(n=-1)
+Read and return one line from the file. Reads in at most n bytes if specified.
+readlines(n=-1)
+Read and return a list of lines from the file. Reads in at most n bytes/characters if specified.
+seek(offset,from=SEEK_SET)
+Change the file position to offset bytes, in reference to from (start, current, end).
+seekable()
+Returns True if the file stream supports random access.
+tell()
+Returns the current file location.
+truncate(size=None)
+Resize the file stream to size bytes. If size is not specified, resize to current location.
+writable()
+Returns True if the file stream can be written to.
+write(s)
+Write string s to the file and return the number of characters written.
+writelines(lines)
+Write a list of lines to the file.
+
+Use file lock if more than one process use a file.
+import fcntl
+import time
+
+while True: # we keep trying forever until we manage to access the file
+    # you can change the loop to try a certain number of times
+    try:#try/except in case the file is still locked by another process
+        with open('/Users/csstnns/myfile.txt', 'a') as myfile: #open the file for editing
+            fcntl.flock(myfile, fcntl.LOCK_EX | fcntl.LOCK_NB)#lock the file
+            myfile.write('Hello World\n')#edit it
+            fcntl.flock(myfile, fcntl.LOCK_UN)#and now unlock it so other processed can edit it!
+            break
+    except Error:
+        time.sleep(0.05)#wait before retrying
+ working directory using the getcwd() method.
+import os
+
+
+>>> os.getcwd()
+'C:\\Program Files\\PyScripter'
+To change directory
+os.chdir('C:\\Python33')
+To list directories
+os.listdir()
+TO make new directory:
+os.mkdir('test')
+
+os.rename('test','new_one')
+
+os.remove('old.txt')
+
+Try 
+Raise
+Except 
+finally
+
+try:
+...     a = int(input("Enter a positive integer: "))
+...     if a <= 0:
+...         raise ValueError("That is not a positive number!")
+... except ValueError as ve:
+...     print(ve)
+	Finally:
+		Asfaf
+
+exception class has to be derived, either directly or indirectly, from Exception class
+.class ValueTooLargeError(Error):
+  """Raised when the input value is too large"""
+  pass
+raise ValueTooLargeError
+
+Class:
+class Parrot:
+
+    # class attribute
+    species = "bird"
+
+    # instance attribute
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+
+# instantiate the Parrot class
+blu = Parrot("Blu", 10)
+woo = Parrot("Woo", 15)
+
+# access the class attributes
+print("Blu is a {}".format(blu.__class__.species))
+print("Woo is also a {}".format(woo.__class__.species))
+
+# access the instance attributes
+print("{} is {} years old".format( blu.name, blu.age))
+print("{} is {} years old".format( woo.name, woo.age))
+
+Inheritance:
+class Penguin(Bird):
+
+    def __init__(self):
+        # call super() function
+        super().__init__()
+        print("Penguin is ready")
+
+    def whoisThis(self):
+        print("Penguin")
+
+    def run(self):
+        print("Run faster")
+
+we denote private attribute using underscore as prefix i.e single “ _ “ or double “ __“.
+
+class Parrot:
+
+    def fly(self):
+        print("Parrot can fly")
+    
+    def swim(self):
+        print("Parrot can't swim")
+
+class Penguin:
+
+    def fly(self):
+        print("Penguin can't fly")
+    
+    def swim(self):
+        print("Penguin can swim")
+
+# common interface
+def flying_test(bird):
+    bird.fly()
+
+#instantiate objects
+blu = Parrot()
+peggy = Penguin()
+
+# passing the object
+flying_test(blu)
+flying_test(peggy)
+
+The first string is called docstring and has a brief description about the class.
+class MyNewClass:
+   '''This is a docstring. I have created a new class'''
+   pass
+print(MyClass.func) yields the location of function.
+
+Constructor:
+__init__() function
+
+Need to pass self to the functions
+
+Any attribute of an object can be deleted anytime, using the del statement. 
+del c1.imag
+We can even delete the object itself, using the del statement.
+del c1
+On the command del c1, this binding is removed and the name c1 is deleted from the corresponding namespace. The object however continues to exist in memory and if no other name is bound to it, it is later automatically destroyed.
+isinstance() and issubclass() are used to check inheritances. 
+
+MRO must prevent local precedence ordering and also provide monotonicity. It ensures that a class always appears before its parents and in case of multiple parents, the order is same as tuple of base classes.
+MRO of a class can be viewed as the __mro__ attribute or mro() method. The former returns a tuple while latter returns a list.
+>>> MultiDerived.__mro__
+(<class '__main__.MultiDerived'>,
+<class '__main__.Base1'>,
+<class '__main__.Base2'>,
+<class 'object'>)
+
+
+>>> MultiDerived.mro()
+[<class '__main__.MultiDerived'>,
+<class '__main__.Base1'>,
+<class '__main__.Base2'>,
+<class 'object'>]
+ Python iterator object must implement two special methods, __iter__() and __next__(), collectively called the iterator protocol.
+# define a list
+my_list = [4, 7, 0, 3]
+
+# get an iterator using iter()
+my_iter = iter(my_list)
+
+## iterate through it using next() 
+
+#prints 4
+print(next(my_iter))
+
+#prints 7
+print(next(my_iter))
+
+## next(obj) is same as obj.__next__()
+
+#prints 0
+print(my_iter.__next__())
+
+#prints 3
+print(my_iter.__next__())
+
+## This will raise error, no items left
+next(my_iter)
+
+For loop is actually implemented as:
+# create an iterator object from that iterable
+iter_obj = iter(iterable)
+
+
+# infinite loop
+while True:
+   try:
+       # get the next item
+       element = next(iter_obj)
+       # do something with element
+   except StopIteration:
+       # if StopIteration is raised, break from loop
+       break
+One can create their own iterator.
+class PowTwo:
+    """Class to implement an iterator
+    of powers of two"""
+
+    def __init__(self, max = 0):
+        self.max = max
+
+    def __iter__(self):
+        self.n = 0
+        return self
+
+    def __next__(self):
+        if self.n <= self.max:
+            result = 2 ** self.n
+            self.n += 1
+            return result
+        else:
+            raise StopIteration
+dir() list out all names in the scope.
+
+Generators are simpler than iterators.
+If a function contains at least one yield statement (it may contain other yield or return statements), it becomes a generator function. The difference is that, while a return statement terminates a function entirely, yield statement pauses the function saving all its states and later continues from there on successive calls.
+
+my_nums = (x*x for x in [1,2,3,4,5]) 
+use instead of
+
+# def square_numbers(nums):
+
+
+
+
+#     for i in nums:
+
+
+#         yield (i*i)
+
+First class functions: treats function as object or entity.
+Adding () to function name executes the function.
+A higher order function is a function that takes a function as an argument, or returns a function .
+The criteria that must be met to create closure in Python are summarized in the following points.
+We must have a nested function (function inside a function).
+The nested function must refer to a value defined in the enclosing function.
+The enclosing function must return the nested function.
+Decorator 
+
+The above syntax of,
+@star
+@percent
+def printer(msg):
+   print(msg)
+is equivalent to
+def printer(msg):
+   print(msg)
+printer = star(percent(printer))
+
+

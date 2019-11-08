@@ -1,2 +1,2 @@
-# T0571
+This folder contians training notes.
 

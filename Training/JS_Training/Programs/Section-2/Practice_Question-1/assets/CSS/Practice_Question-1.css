@@ -1,0 +1,17 @@
+.form-required:after {
+	content: "*";
+	color: red;
+	margin-left: 5px;
+}
+
+#display,
+#nalert,
+#palert,
+#salert,
+#zalert {
+	display: none;
+}
+
+input{
+    border: 1px solid #a8a8a8;
+}

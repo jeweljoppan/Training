@@ -1,0 +1,304 @@
+CREATE DATABASE site_managment;
+USE site_managment;
+
+CREATE TABLE point_type(
+	point_type_id TINYINT UNSIGNED AUTO_INCREMENT,
+	type VARCHAR(20) NOT NULL UNIQUE,
+	PRIMARY KEY( point_type_id)
+	);
+
+CREATE TABLE timezone(
+	timezone_id TINYINT UNSIGNED AUTO_INCREMENT,
+	name VARCHAR(64) NOT NULL UNIQUE,
+	PRIMARY KEY( timezone_id)
+	);
+
+CREATE TABLE region(
+	region_id INT UNSIGNED AUTO_INCREMENT,
+	region_code VARCHAR(10) UNIQUE NOT NULL,
+	name VARCHAR(50) NOT NULL,
+	timezone TINYINT UNSIGNED,
+	PRIMARY KEY( region_id),
+	CONSTRAINT timezone_fk FOREIGN KEY (timezone) REFERENCES timezone(timezone_id)
+	);
+
+CREATE TABLE country(
+	country_id TINYINT UNSIGNED AUTO_INCREMENT,
+	country_name VARCHAR(20) NOT NULL,
+	PRIMARY KEY( country_id ),
+	UNIQUE( country_name )
+	);
+
+CREATE TABLE state(
+	state_id SMALLINT UNSIGNED AUTO_INCREMENT,
+	state_name VARCHAR(20) NOT NULL UNIQUE,
+	country_id TINYINT UNSIGNED NOT NULL,
+	PRIMARY KEY( state_id ),
+	CONSTRAINT FOREIGN KEY( country_id ) REFERENCES country(country_id)
+	);
+
+CREATE TABLE site(
+	site_id INT UNSIGNED AUTO_INCREMENT,
+	site_code VARCHAR(10) NOT NULL UNIQUE,
+	name VARCHAR(50) NOT NULL,
+	address_line_1 VARCHAR(50) NOT NULL,
+	address_line_2 VARCHAR(50),
+	state SMALLINT UNSIGNED NOT NULL,
+	country TINYINT UNSIGNED NOT NULL,
+	zipcode VARCHAR(8) NOT NULL,
+	description VARCHAR(150),
+	region INT UNSIGNED,
+	PRIMARY KEY( site_id ),
+	CONSTRAINT state_id FOREIGN KEY( state ) REFERENCES state(state_id),
+	CONSTRAINT cntry_id FOREIGN KEY( country ) REFERENCES country(country_id),
+	CONSTRAINT rgion_id FOREIGN KEY (region ) REFERENCES region( region_id)
+	);
+
+
+ALTER TABLE site
+	ADD COLUMN timezone TINYINT UNSIGNED NOT NULL;
+ALTER TABLE site
+	ADD CONSTRAINT tm_zone_site FOREIGN KEY (timezone) REFERENCES timezone(timezone_id);
+
+CREATE TABLE user_role(
+	role_id TINYINT UNSIGNED AUTO_INCREMENT,
+	role VARCHAR(20) NOT NULL UNIQUE,
+	view_all_access BOOLEAN NOT NULL DEFAULT 0,
+	PRIMARY KEY( role_id )
+	);
+
+CREATE TABLE user_details(
+	details_id INT UNSIGNED AUTO_INCREMENT,
+	first_name VARCHAR(50) NOT NULL,
+	last_name VARCHAR(50) NOT NULL,
+	phone INT UNSIGNED NOT NULL,
+	role TINYINT UNSIGNED NOT NULL,
+	current_status BOOLEAN NOT NULL DEFAULT 1,
+	PRIMARY KEY( details_id ),
+	CONSTRAINT role_id FOREIGN KEY ( role ) REFERENCES user_role( role_id)
+	);
+
+CREATE TABLE user_login(
+	user_id INT UNSIGNED AUTO_INCREMENT,
+	email VARCHAR(50) UNIQUE,
+	password VARCHAR(50) NOT NULL,
+	PRIMARY KEY( user_id ),
+	);
+
+CREATE TABLE duty_assigned(
+	duty_id INT UNSIGNED AUTO_INCREMENT,
+	site INT UNSIGNED NOT NULL,
+	user_details INT UNSIGNED NOT NULL,
+	PRIMARY KEY( duty_id ),
+	CONSTRAINT duty_site_id FOREIGN KEY ( site ) REFERENCES site( site_id),
+	CONSTRAINT duty_detls_id FOREIGN KEY ( user_details ) REFERENCES user_details( details_id)
+	);
+
+	
+CREATE TABLE controller(
+	controller_id INT UNSIGNED AUTO_INCREMENT,
+	controller_code VARCHAR(10) NOT NULL UNIQUE,
+	name VARCHAR(20) NOT NULL,
+	current_status BOOLEAN NOT NULL DEFAULT 0,
+	current_site INT UNSIGNED,
+	registered_by INT UNSIGNED,
+	registration_time DATETIME NOT NULL,
+	PRIMARY KEY ( controller_id),
+	CONSTRAINT cur_site FOREIGN KEY( current_site ) REFERENCES site(site_id),
+	CONSTRAINT contr_detls_id FOREIGN KEY ( registered_by ) REFERENCES user_details( details_id)
+	);
+
+CREATE TABLE point(
+	point_id INT UNSIGNED AUTO_INCREMENT,
+	name VARCHAR(20) NOT NULL,
+	type TINYINT UNSIGNED NOT NULL,
+	value VARCHAR(10),
+	last_update DATETIME,
+	controller INT UNSIGNED NOT NULL,
+	PRIMARY KEY( point_id ),
+	CONSTRAINT pnt_type FOREIGN KEY ( type ) REFERENCES point_type( point_type_id ),
+	CONSTRAINT cntlrR_id FOREIGN KEY ( controller ) REFERENCES controller(controller_id)
+	);
+
+ALTER TABLE point
+	ADD COLUMN current_status BOOLEAN NOT NULL DEFAULT 0;	
+
+INSERT INTO timezone(name) VALUES
+	("IST"),
+	("CANADA/ETZ"),
+	("CANADA/CTZ");
+
+INSERT INTO point_type(type) VALUES
+	("Analog"),
+	("Digial");
+
+INSERT INTO region(region_code, name, timezone) VALUES
+	("R001", "South", 1),
+	("R002", "North", 2),
+	("R003", "Central Canada", 3),
+	("R004", "Eastern Canada", 2);
+
+INSERT INTO country(country_name) VALUES
+	("India"),
+	("Canada");
+
+INSERT INTO state(state_name,country_id) VALUES
+	("Kerala", 1),
+	("Tamil Nadu", 1),
+	("Karnataka", 2),
+	("Torronto", 2),
+	("Gujarat", 1),
+	("Niagra", 2);
+
+INSERT INTO site(site_code, name, address_line_1, state, country, zipcode, description, region, timezone) VALUES
+	("S001", "Asset", "Menamkulam", 1, 1, "682039","Flat", 1,1),
+	("S002", "Apple", "Niagara", 6, 2, "45-45-3", "Apartment", 3,3);
+
+
+INSERT INTO site(site_code, name, address_line_1, state, country, zipcode, description, timezone) VALUES
+	("S003", "Asten", "Kakkanad", 1, 1, "682020", "Villa", 1);
+
+INSERT INTO site(site_code, name, address_line_1, state, country, zipcode, description, timezone) VALUES
+	("S004", "L&T", "Torronto", 4, 2, "46-46-46", "Studio", 1);
+
+INSERT INTO user_login(email, password) VALUES
+	("abc@gmail.com", "qwert"),
+	("john@ymail.com","open");
+
+INSERT INTO user_role(role, view_all_access) VALUES
+	("Admin", 1),
+	("Manager", 0),
+	("Viewer", 0);
+
+INSERT INTO user_details(first_name, last_name, phone, role, current_status, user_id) VALUES
+	("Abner", "Biju", 9495658797, 1, 1, 1),
+	("John", "Doe", 7878459687, 3, 0, 2);
+
+INSERT INTO controller(controller_code, name, current_status, current_site, registered_by, registration_time, url) VALUES
+	("CR001", "ID-8086", 1, 1, 1, "2019-09-18 12:00:00", "home/id/124");
+INSERT INTO controller(controller_code, name, current_status, current_site, registered_by, registration_time, url) VALUES
+	("CR002", "ID-8085", 1, 3, 1, "2019-07-15 01:30:00", "home/room/8998);
+INSERT INTO controller(controller_code, name, current_status, current_site, registered_by, registration_time, url) VALUES
+	("CR003", "ID-8008", 1, 4, 1, "2018-07-10 10:30:00", "studio/2323");
+
+INSERT INTO point(name, type, value, last_update, current_status, controller) VALUES
+	("point one", 1, "10101", NOW(), 1, 1);
+
+INSERT INTO point(name, type, value, last_update, current_status, controller) VALUES
+	("point two", 2, "50", NOW(), 1, 2),
+	("third point", 1, "123", NOW(), 0, 1);
+
+INSERT INTO duty_assigned(site, user_details) VALUES
+	(1,1),
+	(3,1),
+	(4,2);
+
+QUERIES:
+
+Query 1:
+
+SELECT 	s.site_code AS "Site Code", s.name As "Site Name", 
+	CONCAT_WS( ",", s.address_line_1, s.address_line_2, st.state_name, c.country_name, zipcode) AS "Address"
+	FROM site AS s
+	INNER JOIN state AS st
+	ON st.state_id = s.state
+	INNER JOIN country AS c
+	ON c.country_id = s.country
+	WHERE region IS NULL
+	ORDER BY s.name ASC;
+
+Query 2:
+
+SELECT 	r.name AS "Region Name", s.name AS "Site Name", 
+	c.name AS "Controller Name", 
+	CASE WHEN c.current_status = 0
+	THEN 'Inactive'
+	ELSE 'Active'
+	END AS "Online Status",
+	c.url AS "URL"
+	FROM region AS r
+	INNER JOIN site AS s
+	ON r.region_id = s.region
+	INNER JOIN controller AS c
+	ON c.current_site = s.site_id
+	INNER JOIN state
+	ON state.state_id = s.state
+	WHERE state.state_name ="Kerala"
+	ORDER BY r.name ASC,s.name ASC, c.name ASC;
+
+Query 3:
+
+SELECT	r.name AS "Region Name", s.name AS "Site Name", 
+	c.name AS "Controller Name", c.url AS "URL",
+	count(p.point_id) AS PointCount
+	FROM region AS r
+	INNER JOIN site AS s
+	ON r.region_id = s.region
+	INNER JOIN controller AS c
+	ON c.current_site = s.site_id
+	INNER JOIN point As p
+	ON p.controller = c.controller_id
+	WHERE c.current_status = 1
+	GROUP BY c.controller_id
+	ORDER BY count(p.point_id) DESC;
+
+Query 4:
+
+SELECT 	s.name AS 'Site',ur.role AS 'User Role', count(ur.role) AS 'User count'
+	FROM site AS s
+	INNER JOIN duty_assigned AS ds
+	ON s.site_id = ds.site
+	INNER JOIN user_details AS ud
+	ON ds.user_details = ud.details_id
+	INNER JOIN user_role AS UR
+	ON ur.role_id = ud.role
+	where ud.current_status = 1 
+	GROUP BY s.name
+	HAVING COUNT(ur.role) >3;
+
+
+Trigger:
+
+DELIMITER //
+
+CREATE TRIGGER update_point_UPDATE
+	AFTER UPDATE ON controller
+	FOR EACH ROW
+	BEGIN
+		DECLARE status BOOLEAN;
+		
+		SELECT current_status 
+		INTO @status
+		FROM  controller
+		WHERE controller_id = NEW.controller_id;
+
+		UPDATE point
+		SET current_status = @status
+		WHERE controller = NEW.controller_id;
+	END;
+//
+
+DELIMITER ;	
+
+DELIMITER //
+
+CREATE TRIGGER update_point_UPDATE
+	AFTER INSERT ON controller
+	FOR EACH ROW
+	BEGIN
+		DECLARE status BOOLEAN;
+		
+		SELECT current_status 
+		INTO @status
+		FROM  controller
+		WHERE controller_id = NEW.controller_id;
+
+		UPDATE point
+		SET current_status = @status
+		WHERE controller = NEW.controller_id;
+	END;
+//
+
+DELIMITER ;	
+	
+	

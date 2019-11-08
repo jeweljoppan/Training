@@ -1,0 +1,211 @@
+{
+    "Data": [
+        {
+            "propertyImage": "assets/img/properties-001.jpg",
+            "propertyName": "Single House Near Orland Park,Chicago",
+            "propertyOwner": "Ghaly Marco",
+            "propertyType": [
+                "APARTMENT",
+                "BAR",
+                "HOUSE"
+            ],
+            "propertyAddress": [
+                "Orkland Park",
+                "Chicago",
+                "IL 60465",
+                "USA"
+            ],
+            "propertyDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+            "propertyPrice": "2.5",
+            "propertyNeed": [
+                "RENT",
+                "month"
+            ],
+            "featured": "true"
+        },
+        {
+            "propertyImage": "assets/img/properties-002.jpg",
+            "propertyName": "Apartment  Mordern 6035 W North Ave",
+            "propertyOwner": "Arafa El sherif",
+            "propertyType": [
+                "APARTMENT",
+                "BAR",
+                "CAFE"
+            ],
+            "propertyAddress": [
+                "8035 W North Ave",
+                "Chicago IL",
+                "",
+                "USA"
+            ],
+            "propertyDescription": "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ",
+            "propertyPrice": "136020",
+            "propertyNeed": [
+                "SALE",
+                "range"
+            ],
+            "featured": "true"
+        },
+        {
+            "propertyImage": "assets/img/properties-003.jpg",
+            "propertyName": "155 Mercer St,New York",
+            "propertyOwner": "Arya Magady",
+            "propertyType": [
+                "RESTAURANT",
+                "SPA",
+                "STORE"
+            ],
+            "propertyAddress": [
+                "155 Mercer St",
+                "New York",
+                "NY 10012",
+                "USA"
+            ],
+            "propertyDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+            "propertyPrice": "5000",
+            "propertyNeed": [
+                "RENT",
+                "month"
+            ],
+            "featured": "true"
+        },
+        {
+            "propertyImage": "assets/img/properties-004.jpg",
+            "propertyName": "Restaurant 160 E 65th St",
+            "propertyOwner": "Arya Magdy",
+            "propertyType": [
+                "FARM",
+                "RESTAURANT",
+                "SPA"
+            ],
+            "propertyAddress": [
+                "160E 65th st",
+                "New York",
+                "NY 10025",
+                "USA"
+            ],
+            "propertyDescription": "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ",
+            "propertyPrice": "1200000",
+            "propertyNeed": [
+                "SALE",
+                ""
+            ],
+            "featured": "true"
+        },
+        {
+            "propertyImage": "assets/img/properties-005.jpg",
+            "propertyName": "Villa 243 W 98th St",
+            "propertyOwner": "Arafa El sherif",
+            "propertyType": [
+                "BAR",
+                "CAFE",
+                "VILLA"
+            ],
+            "propertyAddress": [
+                "243W 98th St",
+                "New York",
+                "NY 10025",
+                "USA"
+            ],
+            "propertyDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+            "propertyPrice": "480000",
+            "propertyNeed": [
+                "SALE",
+                ""
+            ],
+            "featured": "true"
+        },
+        {
+            "propertyImage": "assets/img/properties-006.jpg",
+            "propertyName": "Apartment 54 Morningside Dr Apt 52",
+            "propertyOwner": "Arafa El sherif",
+            "propertyType": [
+                "APARTMENT",
+                "FARM",
+                "SPA"
+            ],
+            "propertyAddress": [
+                "54 Morningside Dr",
+                "New York",
+                "NY 10025",
+                "USA"
+            ],
+            "propertyDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+            "propertyPrice": "2000",
+            "propertyNeed": [
+                "RENT",
+                "month"
+            ],
+            "featured": "true"
+        },
+        {
+            "propertyImage": "assets/img/properties-007.jpg",
+            "propertyName": "Villa 40 Louise Ln, Chester",
+            "propertyOwner": "Sherief El Arafa",
+            "propertyType": [
+                "APARTMENT",
+                "FARM",
+                "VILLA"
+            ],
+            "propertyAddress": [
+                "40 Louise Ln",
+                "Chester",
+                "NY 10918",
+                "USA"
+            ],
+            "propertyDescription": "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+            "propertyPrice": "5000000",
+            "propertyNeed": [
+                "SALE",
+                ""
+            ],
+            "featured": "true"
+        },
+        {
+            "propertyImage": "assets/img/properties-008.jpg",
+            "propertyName": "281 Ocean Terrace, Staten Island",
+            "propertyOwner": "Ghaly Marco",
+            "propertyType": [
+                "HOUSE",
+                "RESTAURANT",
+                "SPA"
+            ],
+            "propertyAddress": [
+                "281 Ocean Terrace",
+                "Staten Isalnd",
+                "NY 10301",
+                "USA"
+            ],
+            "propertyDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+            "propertyPrice": "3000000",
+            "propertyNeed": [
+                "SALE",
+                ""
+            ],
+            "featured": "true"
+        },
+        {
+            "propertyImage": "assets/img/properties-009.jpg",
+            "propertyName": "Villa in 629 East 83rd Street",
+            "propertyOwner": "Fatma Ghaly",
+            "propertyType": [
+                "FARM",
+                "HOUSE",
+                "VILLA"
+            ],
+            "propertyAddress": [
+                "629 E 83rd",
+                "Los Angeles",
+                "CA 900001",
+                "USA"
+            ],
+            "propertyDescription": "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+            "propertyPrice": "1000",
+            "propertyNeed": [
+                "RENT",
+                "year"
+            ],
+            "featured": "true"
+        }
+    ]
+}

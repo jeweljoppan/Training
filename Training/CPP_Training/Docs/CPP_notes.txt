@@ -1,0 +1,302 @@
+RETURN in main
+
+void main is not allowed by the C++ standard (nor the C standard) and should not even compile.
+The int value that main returns is usually the value that will be passed back to the operating system. 0 traditionally indicates that the program was successful.
+You don't have to return 0 explicitly, because that'll happen automatically when main terminates. But it's important to keep in mind that main is the only function where omitting return is allowed.
+
+Pointer vs Reference
+
+Pointers: A pointer is a variable that holds memory address of another variable. A pointer needs to be dereferenced with *operator to access the memory location it points to.
+References : A reference variable is an alias, that is, another name for an already existing variable. A reference, like a pointer is also implemented by storing the address of an object.
+Use references
+In function parameters and return types.
+Use pointers:
+Use pointers if  pointer arithmetic or passing NULL-pointer is needed. For example for arrays (Note that array access is implemented using pointer arithmetic).
+To implement data structures like linked list, tree, etc and their algorithms because to point different cell,we have to use the concept of pointers.
+Example: 
+int arr[] = {10,20,30};
+int *p,i ;
+p = arr;
+for(i = 0; i<3 ; i++)
+{
+cout << *p << endl;
+p++;
+}
+Output:
+10
+20
+30
+NOTE: Here pointer will be ahead of base address.Now take same code in Reference
+int arr[] = {10,20,30};
+int &p = arr[0];
+int i;
+for(i = 0; i<3 ; i++)
+{
+cout << p << endl;
+p++;  //here it will increament arr[0]++
+}
+Output:
+10
+11
+12
+ 
+
+VIRTUAL class
+Pointers to the object objects of the derived class are type compatible with pointers to the base class. Since compiler relaxes type checking. Taking the address of derived and treating it as the address of the base class object is called upcasting.
+Late Binding or dynamic binding(depends on the content of the pointer)
+
+Error if pure virtual function is not defined in derived class.
+Example:
+draw() virtual function.
+Shape parent. Line circle children
+Shape *srr[50];
+for(.....)
+ ar[i]->draw();
+Call draw corresponding to the object stored in array.
+Vtable every class
+Vptr every object
+
+Abstract class cannot be instantiated (No object can be created. Complier will report error and show the virtual function causing it) , but pointers and references of Abstract class type can be created. Abstract class can have normal functions and variables along with a pure virtual function. Abstract classes are mainly used for Upcasting, so that its derived classes can use its interface.
+
+Compiler adds a pointer vptr to class objects containing a virtual function. If no datamember the c++ forces a non zero size to the object. C++ uses size 1. Because on is the smallest non zero positive integer. Vtable has address of the virtual function in a pointer. If no new function is defined in the virtual class compiler places the address of the function in the base class. Vptr holds address to vtable. Vptr has starting address of vtable. Compiler assigns all vptr at the begining of the program. 
+Virtual function in in the derived class cannot called by pointers storing the address of derived class.
+You can remove the error by using ((derived *)) ptr2->fun2();
+Runtime type identification.
+
+Object slicing: If the object of the derived class is assigned to base class object, compiler accepts it,  but it only copies the  base portion of the object.
+You can explicitly prevent object slicing  by puting pure virtual function in the base class. This will cause a compile time error
+
+Any function defined inside the class is considered as inline.. 
+
+Virtual destructor: If an object of derived class is assigned to a pointer of base class using new keyword, then if we use delete keyword to deallocate the memory destructor of the base class is invoked first. This is not ideal. To ensure the destructor of the base class is invoked first we can use virtual destructor.
+Pure virtual destructor. If there is a virtual function it is always better to declare a virtual destructor.
+Inside destructor the local version of the function is called. The virtual part is ignored.(Since is the function is called down the line it call already be destroyed)
+
+Virtual base classes: To resolve ambiguity if there are is a inheriting the base class twice indirectly.
+
+
+Copy elision (or Copy omission) is a compiler optimization technique that avoids unnecessary copying of objects. Now a days, almost every compiler uses it
+
+How to make a class non inheritable? 
+
+In the following code, we make the Final class non-inheritable. When a class Derived tries to inherit from it, we get compilation error.
+An extra class MakeFinal (whose default constructor is private) is used for our purpose. Constructor of Final can call private constructor of MakeFinal as Final is a friend of MakeFinal .
+Note that MakeFinal is also a virtual base class. The reason for this is to call the constructor of MakeFinal through the constructor of Derived, not Final (The constructor of a virtual base class is not called by the class that inherits from it, instead the constructor is called by the constructor of the concrete class).
+/* A program without any compilation error to demonstrate that instances of 
+the Final class can be created */
+#include<iostream> 
+using namespace std; 
+
+class Final; 
+
+class MakeFinal 
+{ 
+private: 
+	MakeFinal() { cout << "MakeFinal constructor" << endl; } 
+	friend class Final; 
+}; 
+
+class Final : virtual MakeFinal 
+{ 
+public: 
+	Final() { cout << "Final constructor" << endl; } 
+}; 
+
+int main(int argc, char *argv[]) 
+{ 
+	Final f; 
+	return 0; 
+} 
+
+OR
+
+class CSealed
+ { 
+private: CSealed() { } 
+friend class CBase;
+ }; 
+class CBase : virtual CSealed
+ { 
+public: CBase() { }
+ };
+How to Hide functionality in inheritance?
+
+#include <iostream>
+class Base
+{
+public:
+	int m_value;
+};
+ 
+class Derived : public Base
+{
+private:
+	using Base::m_value;
+ 
+public:
+	Derived(int value)
+	// We can't initialize m_value, since it's a Base member (Base must initialize it)
+	{
+		// But we can assign it a value
+		m_value = value;
+	}
+};
+ 
+int main()
+{
+	Derived derived(7);
+ 
+	// The following won't work because m_value has been redefined as private
+	std::cout << derived.m_value;
+ 
+	return 0;
+}
+
+In C++, it is not possible to remove or restrict functionality from a base class other than by modifying the source code. However, in a derived class, it is possible to hide functionality that exists in the base class, so that it can not be accessed through the derived class. This can be done simply by changing the relevant access specifier.
+Note that this allowed us to take a poorly designed base class and encapsulate its data in our derived class. Alternatively, instead of inheriting Base’s members publicly and making m_value private by overriding its access specifier, we could have inherited Base privately, which would have caused all of Base’s member to be inherited privately in the first place.
+
+You can also mark member functions as deleted in the derived class, which ensures they can’t be called at all through a derived object:
+#include <iostream>
+class Base
+{
+private:
+	int m_value;
+ 
+public:
+	Base(int value)
+		: m_value(value)
+	{
+	}
+ 
+	int getValue() { return m_value; }
+};
+ 
+class Derived : public Base
+{
+public:
+	Derived(int value)
+		: Base(value)
+	{
+	}
+ 
+ 
+	int getValue() = delete; // mark this function as inaccessible
+};
+ 
+int main()
+{
+	Derived derived(7);
+ 
+	// The following won't work because getValue() has been deleted!
+	std::cout << derived.getValue();
+ 
+	return 0;
+}
+In the above example, we’ve marked the getValue() function as deleted. This means that the compiler will complain when we try to call the derived version of the function. Note that the Base version of getValue() is still accessible though. This means that a Derived object can still access getValue() by upcasting the Derived object to a Base first:
+int main()
+{
+	Derived derived(7);
+ 
+	// We can still access the function deleted in the Derived class through the Base class
+	std::cout << static_cast<Base>(derived).getValue();
+ 
+	return 0;
+}
+
+
+FiILES
+Problems with printf/scanf:
+So many access specifiers as %d,%f etc.
+Dont carry out logical conversion. 3.5%d neither produces 3 npr 4.
+No warning if there is mismatch in specifiers. (since here functions are interpeted during compile time not runtime.)
+Overloading printf is not possible  since type info is in the format string and valist.
+Interpreter is loaded at runtime for valist such as printf/scanf. Unnecessary overheads.
+Ios class contains a pointer to the streambuf, which contains the actualmemory buffer into which data is read or written.
+
+Allignment ad related aminpulaation go to let us c++ pg:399
+
+EOF() checks bit failbit badbit and hardfail if true by calling fail() if true returns 0 else this.
+Overloads void*
+
+File modes pg423
+
+Templates:
+
+Single class/function that operates on different datatypes.
+Function templaye syntax
+Eg:
+Template <class T>
+T min (T a, T b)
+{
+Return (a<b)?a:b;
+}
+
+Tcan be of any name. It is known as template argument.
+Code generation only takes place when function is called. At function call it knows the datatype and replaces T with datatype. This process is known as instantiation of function template. One copy for each datatype.
+
+For multiple type:
+
+template<class T,class S,class Z>
+Void ( T a,S b, C c)
+{
+//……..
+}
+
+Int main()
+{
+Int i=10;
+Char ch=’a’;
+Float j = 3.14;
+fun(i,ch,j);
+}    
+Template class:
+Template <class T>
+Class name
+{
+….
+};
+
+-> To Define a function outside the class
+template<class T>
+Void stack<T>::fntnaem(T objname)
+{
+…
+};
+
+-> Object creation: classname<datatype> objname;
+
+-> When a template class returns value of its own class. Then syntax:
+
+classname<T>classname<T>::ftn name(classname obj)
+{
+}
+
+-> Default arguments become compile time constants
+template<class T,int max=50>
+Class sample
+{
+};
+Inheritance of a template class
+template<class T>
+Class newsample:public sample<T>
+{
+}
+-> everytime a template is instantiated the code in the template is generated anew. If some functionality does not depend on type, it is kept in a common base class to prevent unnecessary duplication of code.
+
+-> use template while creating a type safe collection class that can operate on any datatype.
+
+Exemption handling:
+
+
+Write code with issue within try clause.
+Method 1:
+Create a class to handle the error
+Throw the error using throw errorhandlingclassname();
+Method 2:
+Simply throw the expemtion.
+Inside catch(invoke the errorclass constructor)
+Specify default use catch(...){} 
+
+Augmentation error: parent classes having function with same name when called.
+
+

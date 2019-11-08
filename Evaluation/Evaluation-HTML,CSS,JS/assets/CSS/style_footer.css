@@ -1,0 +1,137 @@
+/* ====== GENERIC ====== */
+.color-green {
+	color: #92c800;
+}
+/* ====== FOOTER ====== */
+footer {
+	background: url("../img/footer-bg.jpg");
+	background-size: cover;
+}
+
+.btn-grn {
+	background-color: #92c800;
+	border-radius: 25px;
+	width: 100px;
+	color: #f5f5f5;
+}
+
+.btn-none {
+	border: 2px solid #92c800;
+	border-radius: 25px;
+	width: 100px;
+	color: #f5f5f5;
+	background-color: transparent;
+}
+
+.btn-grn:hover {
+	background-color: #f5f5f5;
+	color: #92c800;
+}
+
+.btn-none:hover {
+	background-color: #92c800;
+	color: #f5f5f5;
+}
+/* ----- Font awesome icon ------*/
+.fawesome {
+	display: inline-block;
+	border-radius: 60px;
+	font-size: 13px;
+	color: #f5f5f5;
+	background-color: rgba(245, 245, 245, 0.1);
+	padding: 23px;
+}
+
+.fawesome:hover{
+	background-color: #92c800;
+	color: #f5f5f5;
+	text-decoration: none;
+}
+#footer-title img {
+	float: left;
+}
+
+footer h4 {
+	padding: 25px 0;
+}
+#footer-title p {
+	position: relative;
+	font-size: 16px;
+	top: 20px;
+	line-height: 35px;
+	left: 10px;
+}
+#footer-title {
+	padding: 50px 0;
+	border-bottom: 1px solid rgba(245, 245, 245, 0.1);
+}
+
+#footer-content {
+	padding: 20px 0 50px 0;
+	border-bottom: 1px solid rgba(245, 245, 245, 0.1);
+}
+
+/* ----- Popular Cities ------*/
+#cities {
+	padding: 0;
+}
+
+
+#cities li {
+	list-style: none;
+}
+
+#cities li:hover{
+	color: #92c800;
+}
+
+/* ----- Contact Us------*/
+#nalert,
+#malert {
+	display: none;
+}
+
+.user-content {
+	border: 0px;
+	border-radius: 50px;
+	height: 40px;
+	width: 100%;
+	padding: 10px;
+	margin-top: 10px;
+}
+
+#comment {
+	border-radius: 10px;
+	height: 60px;
+}
+/* ----- Newsletter ------*/
+#newsletter {
+	padding: 30px 0;
+}
+.subscribe-mail {
+	position: relative;
+	top: -15px;
+}
+
+#mail {
+	width: 60%;
+	background-color: rgba(0, 0, 0, 0);
+	border: 2px solid rgba(245, 245, 245, 0.3);
+	color: white;
+	outline: none;
+}
+.newsletter-heading img {
+	float: left;
+	top: -5px;
+	position: relative;
+}
+
+.newsletter-heading p {
+	position: relative;
+}
+
+/* ----- Copyright ------*/
+#copyright {
+	padding: 30px;
+	text-align: center;
+}

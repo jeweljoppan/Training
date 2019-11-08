@@ -1,0 +1,186 @@
+An RDBMS is a type of DBMS with a row-based table structure that connects related data elements and includes functions that maintain the security, accuracy, integrity and consistency of the data.
+The most basic RDBMS functions are related to create, read, update and delete operations, collectively known as CRUD.
+Metadata is data that describes other data. Meta is a prefix that in most information technology usages means "an underlying definition or description." Metadata summarizes basic information about data, which can make finding and working with particular instances of data easier. 
+A data dictionary is a collection of descriptions of the data objects or items in a data model for the benefit of programmers and others who need to refer to them.
+
+Difference Between File System and DBMS in Tabular Form
+Definition
+A file system is a software that manages the data files in a computer system. DBMS is a software to create and manage databases.
+Usage
+File system helps to store a collection of raw data files into the hard disk. DBMS helps to easily store, retrieve and manipulate data in a database. This is the main difference between file system and DBMS.
+Operations
+Tasks such as storing, retrieving and searching are done manually in a file system. Therefore, it is difficult to manage data using a file system. On the other hand, operations such as updating, searching, selecting data is easier in DBMS because it allows using SQL querying.
+Data Consistency
+File system has data inconsistency whereas DBMS provides higher data consistency using normalization.
+Data Redundancy
+There is more redundant data in a file system whereas there is low data redundancy in a DBMS.
+Security
+DBMS provides more security to the data than the file system.
+Backup and Recovery Process
+Backup and recovery process is not efficient in files system because it is not possible to recover the lost data. On the contrary, a DBMS has a sophisticated backup and recovery.
+Users
+File system is appropriate to handle data of a small-scale organization or individual users. On the other hand, DBMS is suitable for medium to large organizations or multiple users.
+Complexity
+Handling the file system is simple but handling a DBMS is complex.
+Examples
+NTFS and Ext are some examples of file systems. MySQL, MSSQL, Oracle, and DB2 are some examples of DBMS.
+Conclusion
+The difference between file system and DBMS is that file system helps to store a collection of raw data files into the hard disk while DBMS helps to easily store, retrieve and manipulate data in a database. In brief, DBMS provides more flexibility in accessing and managing data than the file system.
+SQL commands are mainly categorized into four categories as:
+DDL – Data Definition Language
+DQl – Data Query Language
+DML – Data Manipulation Language
+DCL – Data Control Language
+DDL(Data Definition Language) : DDL or Data Definition Language actually consists of the SQL commands that can be used to define the database schema. It simply deals with descriptions of the database schema and is used to create and modify the structure of database objects in the database.
+CREATE, DROP, ALTER, TRUNCATE COMMENT, RENAME
+
+DQL (Data Query Language) : DML statements are used for performing queries on the data within schema objects. The purpose of DQL Command is to get some schema relation based on the query passed to it.
+SELECT
+ 
+DML(Data Manipulation Language) : The SQL commands that deals with the manipulation of data present in the database belong to DML or Data Manipulation Language and this includes most of the SQL statements.
+INSERT, UPDATE, DELETE.
+
+DCL(Data Control Language) : DCL includes commands such as GRANT and REVOKE which mainly deals with the rights, permissions and other controls of the database system.
+GRANT, REVOKE
+
+TCL(transaction Control Language) : TCL commands deals with the transaction within the database.
+COMMIT, ROLLBACK, SAVEPOINT, SET TRANSACTION.
+
+
+server
+Optional − The host name running the database server. If not specified, then the default value will be localhost:3306.
+
+Datatypes:
+
+INT, TINYINT, SMALLINT, MEDIUMINT, BIGINT, FLOAT(M,D), DOUBLE(M,D), DECIMAL(M,D),  DATE, DATETIME, TIMESTAMP, TIME, YEAR(M). CHAR(M), VARCHAR(M), BLOB OR TEXT, TINYBLOB OR TINYTEXT, MEDIUMBLOB OR MEDIUMTEXT, LONGBLOB OR LONGTEXT, ENUM. 
+
+      
+
+The UNION operator is used to combine the result-set of two or more SELECT statements.
+Each SELECT statement within UNION must have the same number of columns
+The columns must also have similar data types
+The columns in each SELECT statement must also be in the same order
+SELECT column_name(s) FROM table1
+UNION
+SELECT column_name(s) FROM table2;
+
+Use union all to allow duplicate values.
+
+ALTER TABLE table_name
+ADD column_name datatype;
+
+ALTER TABLE table_name
+DROP COLUMN column_name;
+
+ALTER TABLE table_name
+MODIFY COLUMN column_name datatype;
+
+The DROP TABLE command deletes a table in the database.
+DROP TABLE Shippers;
+
+The TRUNCATE TABLE command deletes the data inside a table, but not the table itself.
+TRUNCATE TABLE Categories;
+
+Transactions have the following four standard properties, usually referred to by the acronym ACID.
+Atomicity − ensures that all operations within the work unit are completed successfully. Otherwise, the transaction is aborted at the point of failure and all the previous operations are rolled back to their former state.
+Consistency − ensures that the database properly changes states upon a successfully committed transaction.
+Isolation − enables transactions to operate independently of and transparent to each other.
+Durability − ensures that the result or effect of a committed transaction persists in case of a system failure.
+Transaction Control
+The following commands are used to control transactions.
+COMMIT − to save the changes.
+ROLLBACK − to roll back the changes.
+SAVEPOINT − creates points within the groups of transactions in which to ROLLBACK.
+SET TRANSACTION − Places a name on a transaction.
+
+Transaction Control
+The following commands are used to control transactions.
+COMMIT − to save the changes.
+ROLLBACK − to roll back the changes.
+SAVEPOINT − creates points within the groups of transactions in which to ROLLBACK.
+SET TRANSACTION − Places a name on a transaction.
+To perform rollback always ensure to use  “start transaction;”
+
+https://www.tutorialspoint.com/sql/sql-transactions.html
+
+% the percentage character is used to specify a pattern of zero (0) or more characters. It has the following basic syntax.
+SELECT statements... WHERE fieldname LIKE 'xxx%';
+_ underscore wildcard
+The underscore wildcard is used to match exactly one character. 
+Escape keyword.
+The ESCAPE keyword is used to escape pattern matching characters such as the (%) percentage and underscore (_) if they form part of the data.
+
+SELECT * FROM movies WHERE title LIKE '67#%%' ESCAPE '#';
+Temporary Tables
+The temporary tables could be very useful in some cases to keep temporary data. The most important thing that should be known for temporary tables is that they will be deleted when the current client session terminates.
+Temporary tables were added in the MySQL Version 3.23. If you use an older version of MySQL than 3.23, you cannot use the temporary tables, but you can use Heap Tables.
+CREATE TEMPORARY TABLE SalesSummary (
+   -> product_name VARCHAR(50) NOT NULL
+   -> , total_sales DECIMAL(12,2) NOT NULL DEFAULT 0.00
+   -> , avg_unit_price DECIMAL(7,2) NOT NULL DEFAULT 0.00
+   -> , total_units_sold INT UNSIGNED NOT NULL DEFAULT 0
+ All other operations remain the same.
+
+Clone table
+Step 1 − Get the complete structure about the table.
+Step 2 − Rename this table and create another table.
+Step 3 − After executing step 2, you will create a clone table in your database. If you want to copy data from old table then you can do it by using INSERT INTO... SELECT statement.
+INSERT INTO clone_tbl (tutorial_id,
+   -> tutorial_title,
+   -> tutorial_author,
+   -> submission_date)
+   
+   -> SELECT tutorial_id,tutorial_title,
+   -> tutorial_author,submission_date
+   -> FROM tutorials_tbl;
+
+If a subquery returns more than one value, you can use other operators such as IN or NOT IN operator in the WHERE clause.
+When you use a subquery in the FROM clause, the result set returned from a subquery is used as a temporary table. This table is referred to as a derived table or materialized subquery.
+
+https://ramkedem.com/en/mysql-scalar-functions/
+
+Stored Procedure
+
+CREATE PROCEDURE
+@data datatype,
+@data datatype
+As 
+BEGIN
+	Select….. ;
+END
+
+You can either specify or not specify the parameter while SP is invoked.
+
+Use ALTER PROCEDURE to change the procedure.
+Use DROP PROCEDURE procedurename to delete a procedure
+
+1NF
+Each data should be atomic.
+Should be of same datatype.
+Columns should have unique name.
+Order in which data stored doesn't matter.
+
+2NF
+Table should be in 1NF.
+Shouldn't have partial dependency.
+
+3NF
+Should be in 2NF
+Shouldn't have transitive dependency. 
+
+BCNF
+Should be of 3NF.
+Non prime attribute shouldnt derive prime attribute.
+
+4NF
+Should be in bcnf.
+Shouldn't have multivalued dependency. 
+
+
+https://www.youtube.com/playlist?list=PLLGlmW7jT-nTr1ory9o2MgsOmmx2w8FB3iv>
+
+Use below code to get table constraints
+SHOW CREATE TABLE <tablename>;
+
+
+

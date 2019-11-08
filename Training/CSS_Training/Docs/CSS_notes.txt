@@ -1,0 +1,6 @@
+Absolute positioning means the elemnt is positioned wrt to closest parent which is positioned relatively/absolutely.
+
+Relative positioning means the elkement is positiined relative to its orginal position
+
+Z-index which  element should appear on top. But cannot be specified for static elements.
+

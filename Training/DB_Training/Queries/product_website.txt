@@ -1,0 +1,258 @@
+CREATE DATABASE product_website;
+USE product_website;
+
+CREATE TABLE payment_methods(
+	payment_id INT AUTO_INCREMENT,
+	payment_types VARCHAR(15) NOT NULL,
+	PRIMARY KEY( payment_id ),
+	UNIQUE( payment_types )
+	);
+
+INSERT INTO payment_methods(payment_types) VALUES
+	("Cash"),
+	("UPI"),
+	("Debit Card"),
+	("Credit Card")
+	;
+
+CREATE TABLE shipment_status(
+	unique_id INT AUTO_INCREMENT,
+	status VARCHAR(20) NOT NULL,
+	PRIMARY KEY( unique_id ),
+	UNIQUE( status )
+	);
+
+INSERT INTO shipment_status(status) VALUES
+	("Processing"),
+	("Packed"),
+	("Shipped"),
+	("Out for delivery"),
+	("Delivered")
+	;
+
+CREATE TABLE categories(
+	category_id INT AUTO_INCREMENT,
+	name VARCHAR(20) NOT NULL,
+	PRIMARY KEY( category_id ),
+	UNIQUE( name )
+	);
+
+INSERT INTO categories(name) VALUES
+	("Fashhion"),
+	("Electronics"),
+	("Groceries")
+	;
+
+
+CREATE TABLE seller(
+	seller_id INT AUTO_INCREMENT,
+	seller_code VARCHAR(32) NOT NULL,
+	seller_name VARCHAR(20) NOT NULL,
+	contact INT NOT NULL,
+	mail VARCHAR(20) NOT NULL,
+	current_status BOOLEAN DEFAULT 1,
+	PRIMARY KEY( seller_id ),
+	UNIQUE( seller_code, seller_name, contact, mail )
+	);
+
+INSERT INTO seller(seller_code, seller_name, contact, mail) VALUES
+	("S001", "Star Stores", 123456789, "abc@gmail.com"),
+	("S002", "Diamond Stores",234234123, "qwe@gmail.com"),
+	("S003", "Jobs Enterprise", 456231342, "tyu@ymail.com"),
+	("S004", "Time Inventories", 678678908, "opinvtry@hotmail.com")
+	;
+
+CREATE TABLE country(
+	country_id INT AUTO_INCREMENT,
+	country_name VARCHAR(20) NOT NULL,
+	PRIMARY KEY( country_id ),
+	UNIQUE( country_naME )
+	);
+
+INSERT INTO country(country_name) VALUES
+	("India"),
+	("USA"),
+	("CANADA");
+
+
+CREATE TABLE customer(
+	customer_id INT AUTO_INCREMENT,
+ 	customer_code VARCHAR(32) NOT NULL UNIQUE,
+	customer_name VARCHAR(50) NOT NULL,
+	customer_age TINYINT UNSIGNED NOT NULL,
+	number INT UNSIGNED NOT NULL UNIQUE,
+	email VARCHAR(20) NOT NULL UNIQUE,
+	current_status BOOLEAN DEFAULT 1,
+	PRIMARY KEY( customer_id )
+	);
+
+
+CREATE TABLE state(
+	state_id INT AUTO_INCREMENT,
+	state_name VARCHAR(20) NOT NULL UNIQUE,
+	country_id INT NOT NULL,
+	PRIMARY KEY( state_id ),
+	CONSTRAINT FOREIGN KEY( country_id ) REFERENCES country(country_id)
+	);
+
+INSERT INTO state(state_name,country_id) VALUES
+	("Kerala", 1),
+	("Tamil Nadu", 1),
+	("Karnataka", 2),
+	("Torronto", 3),
+	("New York", 2),
+	("Chicago", 2),
+	("Gujarat", 1),
+	("Ohio", 2)
+	;
+
+CREATE TABLE customer_address(
+	address_id INT UNSIGNED AUTO_INCREMENT,
+	customer_id MEDIUMINT UNSIGNED,
+	address_line_1 VARCHAR(50) NOT NULL,
+	address_line_2 VARCHAR(50),
+	city VARCHAR(30) NOT NULL,
+	state INT NOT NULL,
+	country INT NOT NULL,
+	zipcode  VARCHAR(8) NOT NULL,
+	shipping BOOLEAN DEFAULT 0,
+	billing BOOLEAN DEFAULT 0,
+	deleted BOOLEAN DEFAULT 1,
+	PRIMARY KEY(address_iD),
+	CONSTRAINT state_id FOREIGN KEY( state ) REFERENCES state(state_id),
+	CONSTRAINT cntry_id FOREIGN KEY( country ) REFERENCES country(country_id)
+	); 
+	
+CREATE TABLE sub_categories(
+	sub_category_id INT AUTO_INCREMENT,
+	name VARCHAR(20) NOT NULL,
+	category_id INT NOT NULL,
+	PRIMARY KEY( sub_category_id),
+	CONSTRAINT cat_id FOREIGN KEY( category_id ) REFERENCES categories(category_id));
+	
+CREATE TABLE product_details(
+	product_details_id INT UNSIGNED AUTO_INCREMENT,
+	product_code VARCHAR(8) NOT NULL,
+	category_id INT NOT NULL,
+	product_name VARCHAR(32) NOT NULL,
+	product_desc VARCHAR(50),
+	current_status BOOLEAN DEFAULT 1,
+	PRIMARY KEY (product_details_id),
+	CONSTRAINT pro_cat_id FOREIGN KEY( category_id ) REFERENCES sub_categories(sub_category_id)
+	);
+	
+CREATE TABLE product(
+	product_id INT AUTO_INCREMENT,
+	seller_id INT NOT NULL,
+	product_details_id INT UNSIGNED NOT NULL,
+	unit_price DECIMAL(10,2) UNSIGNED NOT NULL,
+	units_remaining MEDIUMINT UNSIGNED NOT NULL,
+	current_status BOOLEAN DEFAULT 1,
+	PRIMARY KEY( product_id ),
+	UNIQUE( seller_id, product_details_id ),
+	CONSTRAINT seller_id FOREIGN KEY( seller_id ) REFERENCES seller(seller_id),
+	CONSTRAINT pro_det_id FOREIGN KEY( product_details_id ) REFERENCES product_details(product_details_id)
+	);
+	
+CREATE TABLE orders(
+	order_id INT UNSIGNED AUTO_INCREMENT,
+	guid BINARY(16),
+	order_date DATE,
+	customer_id INT NOT NULL,
+	payment_status 	BOOLEAN NOT NULL DEFAULT 0,
+	payment_method	INT DEFAULT 1,
+	total DECIMAL(10,2) NOT NULL,
+	tax DECIMAL(6,2) NOT NULL,
+	gross DECIMAL(10,2) NOT NULL,
+	total_discount DECIMAL(10,2) NOT NULL DEFAULT 0,
+	shipping_addr INT UNSIGNED NOT NULL,	
+	billing_addr INT UNSIGNED NOT NULL,
+	order_status INT NOT NULL DEFAULT 1,
+	PRIMARY KEY(order_id),
+	CONSTRAINT customer_id FOREIGN KEY( customer_id ) REFERENCES customer( customer_id ),
+	CONSTRAINT payment FOREIGN KEY( payment_method ) REFERENCES payment_methods( payment_id ),
+	CONSTRAINT billing FOREIGN KEY( billing_addr ) REFERENCES customer_address( address_id ),
+	CONSTRAINT shipping FOREIGN KEY( shipping_addr ) REFERENCES customer_address( address_id ),
+	CONSTRAINT stat FOREIGN KEY( order_status ) REFERENCES shipment_status( unique_id )
+	);
+
+CREATE TABLE order_items(
+	order_item_id INT UNSIGNED AUTO_INCREMENT,
+	order_id INT UNSIGNED NOT NULL,
+	product_id INT NOT NULL,
+	product_count TINYINT UNSIGNED,
+	shipment_status INT NOT NULL DEFAULT 1,
+	discount DECIMAL(10,2) NOT NULL DEFAULT 0,
+	estimated_delivery DATE,
+	actual_delivery DATE DEFAULT NULL,
+	PRIMARY KEY( order_item_id),
+	UNIQUE( order_id,product_id ),
+	CONSTRAINT item_stat FOREIGN KEY( shipment_status ) REFERENCES shipment_status( unique_id ),
+	CONSTRAINT order_id FOREIGN KEY( order_id ) REFERENCES orders( order_id ),
+	CONSTRAINT order_product_id FOREIGN KEY( product_id ) REFERENCES product( product_id )
+	);	
+	
+CREATE PROCEDURE new_cuStomer(	IN name VARCHAR(50), IN age TINYINT UNSIGNED,	
+				IN number INT UNSIGNED, IN email VARCHAR(20))
+	BEGIN
+	DECLARE @customer_code VARCHAR(32);
+	SELECT 
+	INSERT INTO customer( VAL
+		
+INSERT INTO sub_categories(name,category_id) VALUES
+	("Footwear", 1),
+	("Apparels",1),
+	("Smartphones", 2),
+	("Laptops", 2),
+	("Meat", 3),
+	("Vegetables", 3);
+	
+INSERT INTO product_details(product_code,category_id,product_name,product_desc) VALUES
+	("P001","1","Shoes","None"),
+	("P002","1","Flipflops","Good"),
+	("P003","2","Belt","Black"),
+	("P004","2","Wallet","brown"),
+	("P005","3","Nokia","New"),
+	("P006","4","HP","Gaming"),
+	("P007","5","Beef","1kg"),
+	("P008","6","Cabbage","250g");	
+
+INSERT INTO product(seller_id, product_details_id, unit_price, units_remaining) VALUES
+	(1, 1,500, 20),
+	(2, 3, 300, 25),
+	(4, 7, 320, 20),
+	(3, 2, 150, 22),
+	(2, 6, 25000, 4);
+
+INSERT INTO customer(customer_code,customer_name,customer_age,number,email) VALUES
+	("COO1", "Arun", 20, 231231123, "erer@gmail.com"),
+	("C002", "Ram", 34, 908978657, "tyewrw@ymail.com");
+
+INSERT INTO customer_address(customer_id,address_line_1,city,state,country,zipcode,shipping,billing) VALUES
+	(1, "abs House", "Pala", 1, 1, 686575,0 , 1),
+	(2, "wqe flat", "kottayam", 1, 1, 686868, 0, 1),
+	(1, "flat no:23, Asset Homes", "Menamkulam", 1, 1, 343434, 1, 0),
+	(2, "aaaa Villa", "St. lane", 5, 2, 45-45-45,1,0);
+ 
+INSERT INTO orders(order_date, customer_id, payment_status, payment_method, total, tax, total_discount, gross, shipping_addr, billing_addr, order_status)
+VALUES
+	("2019-01-01", 1, 1, 1, 800,100,100,800,1,1,1);
+INSERT INTO orders(order_date, customer_id, payment_status, payment_method, total, tax, total_discount, gross, shipping_addr, billing_addr, order_status)
+VALUES
+	("2019-05-02", 2, 1, 1, 25000,2000,500,27000,2,4,1);
+
+INSERT INTO order_items(order_id,product_id,product_count,shipment_status,discount, estimated_delivery) VALUES
+	(1, 1, 1, 2, 0, "2019-01-10");
+INSERT INTO order_items(order_id,product_id,product_count,shipment_status,discount, estimated_delivery) VALUES
+	(1, 2, 1, 1, 100, "2019-01-15");
+INSERT INTO order_items(order_id,product_id,product_count,shipment_status,discount, estimated_delivery) VALUES
+	(2, 5, 1, 3, 500, "2019-05-15");
+
+
+QUERIES
+
+SELECT cat.name AS 'Category', sub.name AS 'Subcategory', prod.product_name AS 'Product'
+	FROM product_details AS 'prod'
+	categories AS cat
+	INNER JOIN sub_categories AS sub
+	ON cat.category_id = sub.category_id;

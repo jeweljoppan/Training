@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="autho" content="Jewel Jo Prince" />
+    <meta name="description" content="Presentation sample Question" />
+    <meta name="keywords" content="HTML,CSS">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+        * {
+            order: 0;
+        }
+
+        .parent {
+            height: 800px;
+            display: flex;
+        }
+*{
+    order: 0;
+}
+.parent {
+    display: flex;
+    height: 800px;
+    justify-content: space-between;
+    flex-flow: wrap; /*default row nowrap*/
+    align-content: flex-end;
+}
+
+.child {
+    background: tomato;
+    padding: 5px;
+    width: 150px;
+    height: auto;
+    margin: 15px;
+
+    line-height: 150px;
+    color: white;
+    font-weight: bold;
+    font-size: 3em;
+    text-align: center;
+}
+
+#a1{
+    order: 2;
+}
+
+#a2 {
+    order: 1;
+    align-self: flex-start;
+}
+
+#a3 {
+    order: 4;
+}
+
+#a4 {
+    align-self: flex-end;
+    order: 3;
+}
+
+#a5{
+    order: 5;
+}
+
+        .child {
+            background: tomato;
+            padding: 5px;
+            width: auto;
+            height: auto;
+            margin: 15px;
+
+            line-height: 150px;
+            color: white;
+            font-weight: bold;
+            font-size: 3em;
+            text-align: center;
+        }
+    </style>
+    <title>Presentation</title>
+</head>
+
+<body>
+    <div class="parent">
+        <div class="child" id="a1">
+            box 1
+        </div>
+        <div class="child" id="a2">
+            box 2
+        </div>
+        <div class="child" id="a3">
+            box 3
+        </div>
+        <div class="child" id="a4">
+            box 4
+        </div>
+        <div class="child" id="a5">
+            box 5
+        </div>
+</body>
+
+</html>
